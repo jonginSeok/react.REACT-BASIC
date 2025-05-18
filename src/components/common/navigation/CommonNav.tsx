@@ -18,7 +18,7 @@ function CommonNav() {
   // useState로 선언한 반응성을 가진 데이터를 기반으로 UI를 반복호출 해보도록 한다.
   const naviLink = navigation.map((item: Navigation) => {
     return (
-      <Link className={styles.navigation__menu} to={item.path} key={item.path}> 
+      <Link className={styles.navigation__menu} to={item.path} key={item.path}>
         {/* map함수를 사용할때는 key값을 설정해줘야 한다. */}
         <span className={styles.navigation__menu__label}>{item.label}</span>
       </Link>
