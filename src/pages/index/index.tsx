@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import type { CardDTO } from "./types/card";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { imageData } from "@recoil/selectors/imageSelector";
 
 import CommonHeader from "@components/common/header/CommonHeader";
 import CommonNav from "@components/common/navigation/CommonNav";
@@ -8,41 +9,18 @@ import CommonFooter from "@components/common/footer/CommonFooter";
 import Card from "@pages/index/components/Card";
 // CSS
 import styles from "@pages/index/styles/index.module.scss";
-import axios from "axios";
+
+import type { CardDTO } from "./types/card";
 
 function index() {
-  const [imgUrls, setImsUrls] = useState([]);
-  const getData = async () => {
-    // 오픈 API 호출
-    const API_URL = "https://api.unsplash.com/search/photos";
-    const API_KEY = "U48Uloqdp7bFzx2-ASk5nAFpkiHdez2jawISMgSNAcQ";
-    const PER_PAGE = 30;
+  const imageSelector = useRecoilValue(imageData);
 
-    const searchValue = "Korea";
-    const pageValue = 100;
+  const [imgData, setImgData] = useState<CardDTO[]>([]);
 
-    try {
-      const res = await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`);
-
-      console.log(res); // API 호출 결과를 콘솔에 출력
-      // res.data.results라는 배열을 활용할 예정
-
-      if (res.status === 200) {
-        //const imageUrls = res.data.results.map((item) => item.urls.regular);
-        setImsUrls(res.data.results);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
-  const cardList = imgUrls.map((card: CardDTO) => {
+  // imgUrls 배열을 순회하여 Card 컴포넌트를 생성
+  const CARD_LIST = imageSelector.data.results.map((card: CardDTO) => {
     return <Card data={card} key={card.id} />;
-  }) 
-
-  useEffect(() => {
-    getData();
-  }, []);
+  });
 
   return (
     <div className={styles.page}>
@@ -63,7 +41,7 @@ function index() {
           </div>
         </div>
         <div className={styles.page__contents__imageBox}>
-          {cardList}
+          {CARD_LIST}
         </div>
       </div>
       {/* 공통 푸터 UI 부분 */}
@@ -72,4 +50,15 @@ function index() {
   );
 }
 
+{
+/**
+index.tsx:16  Warning: Can't perform a React state update on a component that hasn't mounted yet. This indicates that you have a side-effect in your render function that asynchronously later calls tries to update the component. Move this work to useEffect instead. Error Component Stack
+
+index.tsx:16 경고: 아직 마운트되지 않은 컴포넌트에서 React 상태 업데이트를 수행할 수 없습니다. 이는 나중에 비동기적으로 컴포넌트 업데이트를 시도하는 render 함수에 부작용이 있음을 나타냅니다. 이 작업을 대신 useEffect로 옮기세요. 오류 컴포넌트 스택
+ */
+
+}
+
 export default index;
+
+

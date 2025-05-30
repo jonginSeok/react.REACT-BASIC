@@ -1,15 +1,28 @@
 import { selector } from "recoil";
+import { searchState } from "../atoms/searchState";
+import { pageState } from "../atoms/pageState";
+
 import axios from "axios";
+// 오픈 API 호출
+const API_URL = "https://api.unsplash.com/search/photos";
+const API_KEY = "U48Uloqdp7bFzx2-ASk5nAFpkiHdez2jawISMgSNAcQ";
+const PER_PAGE = 30;
 
 // 자동 코딩
-export const imageSelector = selector({
-  key: "imageSelector",
-  get: async () => {
+export const imageData = selector({
+  key: "imageData",
+  get: async ({ get }) => {
+    const searchValue = get(searchState);
+    const pageValue = get(pageState);
+    
     try {
-      const response = await axios.get("/api/images");
-      return response.data;
+      // API 호출
+      const res = await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`);
+      console.log(res);
+
+      return res;
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   },
 });
