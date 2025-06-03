@@ -43,12 +43,14 @@ $NAVIGATION-HEIGHT: 50px;
                     font-size: 3rem;
                     font-weight: 700;
                 }
+
                 &__desc {
                     color: $color-white-000;
                     margin-bottom: 32px;
                 }
             }
         }
+
         &__imageBox {
             display: flex;
             align-items: center;

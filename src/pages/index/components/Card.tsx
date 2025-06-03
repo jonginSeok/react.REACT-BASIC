@@ -1,19 +1,28 @@
-import type { CardDTO } from "../types/card";
 import styles from "./Card.module.scss";
+import type { CardDTO } from "../types/card";
 
 interface Props {
-  data: CardDTO;
+    data: CardDTO
+    handleDialog: (eventValue: boolean) => void
 }
 
-function Card({ data }: Props) {
-  const openDialog = () => {
-    console.log("openDialog");
-  };
-  return (
-    <div className={styles.card} onClick={openDialog}>
-      <img src={data.urls.small} alt={data.alt_description} className={styles.card__image} />
-    </div>
-  );
+function Card({ data, handleDialog }: Props) {
+    const openDialog = () => {
+        console.log("함수호출");
+        handleDialog(true);
+    };
+
+    return (
+        <div className={styles.card} onClick={openDialog}>
+            <img src={data.urls.small} alt={data.alt_description} className={styles.card__image} />
+        </div>
+    );
+}
+
+{
+// index.tsx:18  Warning: Can't perform a React state update on a component that hasn't mounted yet. 
+// This indicates that you have a side-effect in your render function that asynchronously later calls tries to update the component. 
+// Move this work to useEffect instead. Error Component Stack
 }
 
 export default Card;

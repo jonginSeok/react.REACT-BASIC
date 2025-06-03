@@ -5,15 +5,15 @@ import { RecoilRoot } from "recoil";
 import MainPage from "@pages/index";
 
 function App() {
-  return (
-    <RecoilRoot>
-      <BrowserRouter>
-        <Routes>
-          <Route index path="/" element={<MainPage />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </RecoilRoot>
-  );
+    return (
+        <RecoilRoot>
+            <BrowserRouter>
+                <Routes>
+                    <Route index path="/" element={<MainPage />}></Route>
+                </Routes>
+            </BrowserRouter>
+        </RecoilRoot>
+    );
 }
 
 export default App;
