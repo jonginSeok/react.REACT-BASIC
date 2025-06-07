@@ -57,7 +57,6 @@
                     background: transparent;
 
                     cursor: pointer;
-
                 }
 
                 &__authorImage {
@@ -67,7 +66,6 @@
                 &__authorName {
                     font-weight: 600;
                 }
-
             }
 
             .bookmark {
@@ -95,7 +93,6 @@
                     border: 1px solid $color-gray-600;
 
                     color: $color-gray-600;
-
                 }
             }
         }
@@ -126,12 +123,12 @@
             padding: 0 24px;
             gap: 24px;
 
-
             .infoBox {
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
 
+                width: 100%;
                 gap: 48px;
 
                 &__item {
@@ -149,9 +146,7 @@
                         color: $color-black-900;
                         font-weight: 600;
                     }
-
                 }
-
             }
 
             .tagBox {
@@ -172,9 +167,6 @@
 
                 }
             }
-
         }
-
     }
-
 }

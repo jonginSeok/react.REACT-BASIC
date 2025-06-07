@@ -1,6 +1,6 @@
 import { selector } from "recoil";
-import { searchState } from "../atoms/searchState";
-import { pageState } from "../atoms/pageState";
+import { searchState } from "@recoil/atoms/searchState";
+import { pageState } from "@recoil/atoms/pageState";
 
 import axios from "axios";
 // 오픈 API 호출
@@ -10,19 +10,19 @@ const PER_PAGE = 30;
 
 // 자동 코딩
 export const imageData = selector({
-  key: "imageData",
-  get: async ({ get }) => {
-    const searchValue = get(searchState);
-    const pageValue = get(pageState);
-    
-    try {
-      // API 호출
-      const res = await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`);
-      console.log(res);
+    key: "imageData",
+    get: async ({ get }) => {
+        const searchValue = get(searchState);
+        const pageValue = get(pageState);
 
-      return res;
-    } catch (error) {
-      console.log(error);
-    }
-  },
+        try {
+            // API 호출
+            const res = await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`);
+            console.log(res);
+
+            return res;
+        } catch (error) {
+            console.log(error);
+        }
+    },
 });
