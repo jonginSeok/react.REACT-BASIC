@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useMemo, useState } from "react";
+import { useRecoilValueLoadable } from "recoil";
 import { imageData } from "@recoil/selectors/imageSelector";
 import type { CardDTO } from "@pages/index/types/card";
 
@@ -15,14 +15,21 @@ import DetailDialog from "@/components/common/dialog/DetailDialog";
 import styles from "./styles/index.module.scss";
 
 function index() {
-    const imageSelector = useRecoilValue(imageData);
+    const imgSelector = useRecoilValueLoadable(imageData);
     const [imgData, setImgData] = useState<CardDTO>();
     const [open, setOpen] = useState<boolean>(false); // 이미지 상세 다이얼로그 발생관리(false)
 
-    // 이미지 상세 다이얼로그를 열기 위한 함수
-    const CARD_LIST = imageSelector.data.results.map((card: CardDTO) => {
-        return <Card data={card} key={card.id} handleDialog={setOpen} handleSetData={setImgData} />;
-    });
+    const CARD_LIST = useMemo(() => {
+        console.log(imgSelector);
+        if ("hasValue" === imgSelector.state) {
+            const result = imgSelector.contents.map((card: CardDTO) => {
+                return <Card data={card} key={card.id} handleDialog={setOpen} handleSetData={setImgData} />;
+            })
+            return result;
+        } else {
+            return <div>로딩중...</div>;
+        }
+    }, [imgSelector])
 
     return (
         <div className={styles.page}>
@@ -48,7 +55,7 @@ function index() {
             </div>
             { /* 공통 푸터 UI 부분 */}
             <CommonFooter />
-            {open && <DetailDialog data={imgData} handleDialog={setOpen}/>}
+            {open && <DetailDialog data={imgData} handleDialog={setOpen} />}
         </div>
     );
 }

@@ -1,6 +1,5 @@
 import type { CardDTO } from "@/pages/index/types/card";
 import styles from "./DetailDialog.module.scss";
-
 interface Props {
     data: CardDTO
     handleDialog: (eventValue: boolean) => void
@@ -9,7 +8,6 @@ interface Props {
 function DetailDialog({ data, handleDialog }: Props) { // 객체 구조분해 할당
     const closeDialog = () => {
         handleDialog(false);
-        console.log("닫기 버튼 클릭");
     }
 
     return (
@@ -39,21 +37,21 @@ function DetailDialog({ data, handleDialog }: Props) { // 객체 구조분해 �
                 </div>
                 <div className={styles.container__dialog__footer}>
                     <div className={styles.infoBox}>
-                        <div className={styles.infoBox_item}>
+                        <div className={styles.infoBox__item}>
                             <span className={styles.infoBox__item__label}>이미지 크기</span>
                             <span className={styles.infoBox__item__value}>
                                 {data.width} x {data.height}
                             </span>
                         </div>
-                        <div className={styles.infoBox_item}>
+                        <div className={styles.infoBox__item}>
                             <span className={styles.infoBox__item__label}>업로드</span>
                             <span className={styles.infoBox__item__value}>{data.created_at.split("T")[0]}</span>
                         </div>
-                        <div className={styles.infoBox_item}>
+                        <div className={styles.infoBox__item}>
                             <span className={styles.infoBox__item__label}>마지막 업데이트</span>
                             <span className={styles.infoBox__item__value}>{data.updated_at.split("T")[0]}</span>
                         </div>
-                        <div className={styles.infoBox_item}>
+                        <div className={styles.infoBox__item}>
                             <span className={styles.infoBox__item__label}>다운로드</span>
                             <span className={styles.infoBox__item__value}>{data.likes}</span>
                         </div>
