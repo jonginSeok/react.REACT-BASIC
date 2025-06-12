@@ -21,11 +21,12 @@ function CommonNav() {
     const [search, setSearch] = useRecoilState(searchState)
 
     useEffect(() => {
+        
         console.log("CommonNav useEffect:", location);
+        
         navigation.forEach((nav: Navigation) => {
-
             nav.isActive = false; // 초기화
-
+            
             if (nav.path === location.pathname) {
                 nav.isActive = true; // 현재 경로와 일치하는 경우 isActive를 true로 설정
                 setSearch(nav.searchValue); // 검색 상태 업데이트
@@ -33,7 +34,6 @@ function CommonNav() {
 
             } else {
                 nav.isActive = false; // 일치하지 않는 경우 isActive를 false로 설정
-
             }
         });
 

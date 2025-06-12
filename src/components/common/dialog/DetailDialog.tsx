@@ -19,9 +19,7 @@ function DetailDialog({ data, handleDialog }: Props) { // 객체 구조분해 �
                     <div className={styles.close}>
                         <button className={styles.close__button} onClick={closeDialog}>
                             {/* 구글 아이콘을 사용 */}
-                            <span className="material-symbols-outlined" style={{ fontSize: 28 + 'px' }}>
-                                close
-                            </span>
+                            <span className="material-symbols-outlined" style={{ fontSize: 28 + 'px' }}>close</span>
                         </button>
                         <img src={data.user.profile_image.small} alt="사진작가 프로필 사진" title="사진작가 프로필 사진" className={styles.close__authorImage} />
                         <span className={styles.close__authorName}>{data.user.name}</span>
@@ -41,9 +39,7 @@ function DetailDialog({ data, handleDialog }: Props) { // 객체 구조분해 �
                     <div className={styles.infoBox}>
                         <div className={styles.infoBox__item}>
                             <span className={styles.infoBox__item__label}>이미지 크기</span>
-                            <span className={styles.infoBox__item__value}>
-                                {data.width} x {data.height}
-                            </span>
+                            <span className={styles.infoBox__item__value}>{data.width} x {data.height}</span>
                         </div>
                         <div className={styles.infoBox__item}>
                             <span className={styles.infoBox__item__label}>업로드</span>

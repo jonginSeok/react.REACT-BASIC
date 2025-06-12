@@ -18,8 +18,11 @@ function index() {
     const imgSelector = useRecoilValueLoadable(imageData);
     const [imgData, setImgData] = useState<CardDTO>();
     const [open, setOpen] = useState<boolean>(false); // 이미지 상세 다이얼로그 발생관리(false)
+    
     const CARD_LIST = useMemo(() => {
+        
         console.log(imgSelector);
+        
         if ("hasValue" === imgSelector.state) {
             const result = imgSelector.contents.map((card: CardDTO) => {
                 return <Card data={card} key={card.id} handleDialog={setOpen} handleSetData={setImgData} />;
