@@ -1,10 +1,11 @@
-import styles from "./Card.module.scss";
 import type { CardDTO } from "@pages/index/types/card";
+
+import styles from "./Card.module.scss";
 
 interface Props {
     data: CardDTO
     handleDialog: (eventValue: boolean) => void
-    handleSetData:(eventValue: CardDTO) => void
+    handleSetData: (eventValue: CardDTO) => void
 }
 
 function Card({ data, handleDialog, handleSetData }: Props) {

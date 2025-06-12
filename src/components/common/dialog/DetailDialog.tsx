@@ -1,5 +1,7 @@
 import type { CardDTO } from "@/pages/index/types/card";
+
 import styles from "./DetailDialog.module.scss";
+
 interface Props {
     data: CardDTO
     handleDialog: (eventValue: boolean) => void
