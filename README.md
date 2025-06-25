@@ -9,3 +9,5 @@
 5. React Router 설치 : npm install react-router-dom localforage match-sorter sort-by <br />
 6. TypeScript에서 Node.js 모듈을 쓸 수 있도록 도와주는 환경 구축 : npm install @types/node <br />
 7. React Toast Popup 모듈 설치 : npm install react-simple-toasts <br />
+
+3:39:47 초

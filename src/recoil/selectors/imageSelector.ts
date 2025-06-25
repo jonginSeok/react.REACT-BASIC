@@ -18,7 +18,9 @@ export const imageData = selector({
         try {
             // API 호출
             const res = await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`);
-            return res.data.results;
+            console.log(res);
+            
+            return res.data;
         } catch (error) {
             console.log(error)
         }

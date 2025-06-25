@@ -20,16 +20,14 @@ function index() {
     const [open, setOpen] = useState<boolean>(false); // 이미지 상세 다이얼로그 발생관리(false)
     
     const CARD_LIST = useMemo(() => {
-        
-        console.log(imgSelector);
-        
+                
         if ("hasValue" === imgSelector.state) {
-            const result = imgSelector.contents.map((card: CardDTO) => {
+            const result = imgSelector.contents.results.map((card: CardDTO) => {
                 return <Card data={card} key={card.id} handleDialog={setOpen} handleSetData={setImgData} />;
             })
             return result;
         } else {
-            return <div>로딩중...</div>;
+            return <div>loading...</div>;
         }
     }, [imgSelector])
 
