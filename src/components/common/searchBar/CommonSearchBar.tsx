@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { searchState } from "@/recoil/atoms/searchState";
+import { pageState } from "@/recoil/atoms/pageState";
 
 import styles from "@components/common/searchBar/CommonSearchBar.module.scss";
 
@@ -8,6 +9,7 @@ function CommonSearchBar() {
     
   const [text, setText] = useState("");
   const [search, setSearch] = useRecoilState(searchState);
+  const [page, setPage] = useRecoilState(pageState);
   const handleChange = (event) => {
     setText(event.target.value);
     // 검색어가 변경될 때마다 상태를 업데이트합니다.
@@ -20,6 +22,7 @@ function CommonSearchBar() {
     } else {
       setSearch(text);
     }
+    setPage(1); // 페이지를 1로 초기화
   };
   // Enter 키를 눌렀을 때 검색어가 비어있으면 default 검색어로 Korea 검색
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -29,6 +32,7 @@ function CommonSearchBar() {
       } else {
         setSearch(text);
       }
+      setPage(1); // 페이지를 1로 초기화
     }
   };
 
