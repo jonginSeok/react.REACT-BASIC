@@ -6,10 +6,9 @@ import { pageState } from "@/recoil/atoms/pageState";
 import styles from "@components/common/searchBar/CommonSearchBar.module.scss";
 
 function CommonSearchBar() {
-    
-  const [text, setText] = useState("");
   const [search, setSearch] = useRecoilState(searchState);
   const [page, setPage] = useRecoilState(pageState);
+  const [text, setText] = useState("");
   const handleChange = (event) => {
     setText(event.target.value);
     // 검색어가 변경될 때마다 상태를 업데이트합니다.

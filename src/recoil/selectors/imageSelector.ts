@@ -19,10 +19,17 @@ export const imageData = selector({
             // API 호출
             const res = await axios.get(`${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`);
             console.log(res);
-            
+
             return res.data;
         } catch (error) {
             console.log(error)
         }
     },
 });
+
+/*
+{
+Rate Limit Exceeded 
+요금 제한 초과
+}
+*/
