@@ -7,7 +7,6 @@ import styles from "./styles/index.module.scss";
 import type { CardDTO } from "../index/types/card";
 
 function index() {
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [data, setData] = useState([]);
 	const getData = () => {
 		const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
@@ -18,7 +17,6 @@ function index() {
 		}
 	};
 
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	useEffect(() => {
 		getData();
 	}, []);
@@ -28,11 +26,14 @@ function index() {
 			{/* 곻통 헤더 UI  부분 */}
 			<CommonHeader />
 			<main className={styles.page__contents}>
-			{
+			{/* 만약, 데이터가 없을 때 */}
+			{ 0 == data.length ?(
+			<div className={styles.page__contents__noData}>조회 가능한 데이터가 없습니다.</div>
+			) : (
 				data.map((item: CardDTO) => {
 					return(<Card prop={item} key={item.id}/>)
 				})
-			}
+			)}
 			</main>
 		</div>
 	);
