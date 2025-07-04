@@ -1,48 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CardDTO } from "@/pages/index/types/card";
 import toast, {toastConfig} from "react-simple-toasts";
 import "react-simple-toasts/dist/theme/dark.css"; // react-simple-toasts 스타일
 import styles from "./DetailDialog.module.scss";
 
-toastConfig({theme: 'dark'}); // 다크 테마로 설정
+toastConfig({
+    theme: "dark",  // 다크 테마로 설정
+    position : 'bottom-right', // 위치: 'top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'
+    //gap: 10, // 토스트 메시지 간격 (픽셀 단위)
+    
+    // 동작 안하는 옵션들
+    //zIndex: 1000, // 토스트 메시지의 z-index 값    
+    //clickable: true, // 토스트 메시지 클릭 가능 여부
+    //clickClosable: true, // 토스트 메시지 클릭 시 닫기 여부
+    //duration: 3000, // 토스트 메시지 표시 시간 (밀리초 단위)    
+    //maxVisibleToasts: 5, // 최대 표시 가능한 토스트 메시지 개수
+    //offsetX : 0, // x축 오프셋
+    //offsetY : 0,  // y축 오프셋
+    //deltaOffsetX : 1, // x축 오프셋 증가량
+    //deltaOffsetY : 0, // y축 오프셋 증가량
+});
 interface Props {
     data: CardDTO
     handleDialog: (eventValue: boolean) => void
 }
 
 function DetailDialog({ data, handleDialog }: Props) { // 객체 구조분해 할당
-    const [bookmark, setBookmark] = useState<boolean>(false); // 북마크 상태 관리 변수
+    const [bookmark, setBookmark] = useState(false); // 북마크 상태 관리 변수
     // 다이얼로그 끄기
     const closeDialog = () => {
         handleDialog(false);
     }
     // 북마크 추가 이벤트 함수
     const addBookmark = (selected: CardDTO) => {
-        console.log("selected:", selected);
-        // 북마크 추가 로직 구현
         setBookmark(true); // 북마크 상태를 true로 변경
+
         const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
         
-        // 1. 로컬 스토리지에 booknark라는 데이터가 없을 경우
+        // 1. 로컬 스토리지에 bookmark 라는 데이터가 없을 경우
         if ( !getLocalStorage || getLocalStorage == null ) {
             // 북마크라는 데이터가 없을 경우
             localStorage.setItem("bookmark", JSON.stringify([selected]));
-            toast("해당 이미지는 북마크에 추가되었습니다. 😊");
-            console.log("해당 이미지는 북마크에 추가되었습니다. 😊");
+            toast("해당 이미지는 북마크에 저장되었습니다. 😊");
         } else {
-            // 2. 해당 이미지가 로컬스토리지에 bookmark라는 데이터가 있을 경우
-            if (getLocalStorage.findIndex((item: CardDTO) => item.id === selected.id) !== -1) {
-                // 북마크에 해당 이미지가 있을 경우
-                toast("이미 북마크에 추가된 이미지입니다. 💢");
-                console.log("이미 북마크에 추가된 이미지입니다. 💢");
+            // 2. 해당 이미지가 로컬스토리지에 bookmark 라는 데이터가 있을 경우
+            if (getLocalStorage.findIndex((item: CardDTO) => item.id == selected.id) > -1) {
+                toast("해당이미지는 이미 북마크에 추가된 상태입니다. 💢");
             } else {
-                // 3. 해당 이미지가 로컬스토리지 bookmark라는 데이터에 저장되어 있을 않을 경우  + bookmark라는 데어터에 이미 어떤 값이 담겨있는 경우
-                const res = [...getLocalStorage];
+                // 3. 해당 이미지가 로컬스토리지 bookmark라는 데이터에 저장되어 있을 않을 경우  + bookmark 라는 데어터에 이미 어떤 값이 담겨있는 경우
+                const res = [...getLocalStorage]; // getLocalstorage 값을 스프레드 연산자로 이미 localStorage 에 담겨있는 데이터를 가져와서 새로운 배열로 만듭니다.
                 res.push(selected);
                 localStorage.setItem("bookmark", JSON.stringify(res));
+
+                toast("해당 이미지는 북마크에 저장되었습니다. 😊", );
             }
         }
     }
+
+    useEffect(() => {
+        const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
+        if (getLocalStorage && getLocalStorage.findIndex((item : CardDTO)=> { return item.id == data.id ? true : false;}) > -1){
+            setBookmark(true); // 북마크 상태를 true로 변경
+        } else if (!getLocalStorage) {
+            return;
+        }
+    }, []);
 
     return (
         <div className={styles.container}>

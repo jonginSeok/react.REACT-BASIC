@@ -1,6 +1,6 @@
 .card {
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
 
     min-width: 282px;
     width: 282px;
@@ -51,10 +51,17 @@
                 align-items: center;
                 justify-content: flex-start;
 
-                width: 120%;
+                width: 120px;
             }
             .value {
+                width: 112px;
                 color: $color-gray-500;
+
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                word-break: break-all;
+
             }
         }
     }

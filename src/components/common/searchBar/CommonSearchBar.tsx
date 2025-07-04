@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";1
 import { searchState } from "@/recoil/atoms/searchState";
 import { pageState } from "@/recoil/atoms/pageState";
-
-import styles from "@components/common/searchBar/CommonSearchBar.module.scss";
+// CSS
+import styles from "./CommonSearchBar.module.scss";
 
 function CommonSearchBar() {
   const [search, setSearch] = useRecoilState(searchState);

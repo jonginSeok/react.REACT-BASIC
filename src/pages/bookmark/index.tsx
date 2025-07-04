@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
 import CommonHeader from "@/components/common/header/CommonHeader";
 import Card from "./components/Card";
+
 // CSS
 import styles from "./styles/index.module.scss";
+import type { CardDTO } from "../index/types/card";
 
 function index() {
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const [data, setData] = useState([]);
-	const getData = () => {};
+	const getData = () => {
+		const getLocalStorage = JSON.parse(localStorage.getItem("bookmark"));
+		if (getLocalStorage || getLocalStorage != null) {
+			setData(getLocalStorage);
+		} else {
+			setData([]);
+		}
+	};
 
+	// eslint-disable-next-line react-hooks/rules-of-hooks
 	useEffect(() => {
-		// 북마크 데이터 가져오기
 		getData();
 	}, []);
 
@@ -18,7 +28,11 @@ function index() {
 			{/* 곻통 헤더 UI  부분 */}
 			<CommonHeader />
 			<main className={styles.page__contents}>
-				<Card/>				
+			{
+				data.map((item: CardDTO) => {
+					return(<Card prop={item} key={item.id}/>)
+				})
+			}
 			</main>
 		</div>
 	);

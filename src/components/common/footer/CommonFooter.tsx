@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { imageData } from "@/recoil/selectors/imageSelector";
 import { searchState } from "@/recoil/atoms/searchState";
 import { pageState } from "@/recoil/atoms/pageState";
-import styles from "@components/common/footer/CommonFooter.module.scss";
+import styles from "./CommonFooter.module.scss";
 
 function CommonFooter() {
   const imgSelector = useRecoilValueLoadable(imageData);
