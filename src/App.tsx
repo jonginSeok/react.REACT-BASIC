@@ -11,8 +11,8 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<MainPage />} index></Route>
-					<Route path="/:id" element={<MainPage />}></Route>
 					<Route path="/bookmark" element={<BookmarkPage />}></Route>
+					<Route path="/search/:id" element={<MainPage />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</RecoilRoot>
